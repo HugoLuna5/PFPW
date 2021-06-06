@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TypeSensor extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'uuid',
+        'nombre'
+    ];
+
 }

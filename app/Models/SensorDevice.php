@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class SensorDevice extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'uuid',
+        'device_id',
+        'type_sensors_id',
+        'value'
+    ];
 }

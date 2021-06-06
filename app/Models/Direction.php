@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Direction extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'uuid',
+        'device_id',
+        'latitude',
+        'longitude',
+        'street',
+        'colony',
+        'city',
+        'state',
+        'cp',
+        'reference_dir',
+        'direction_complete',
+    ];
+
 }

@@ -21,6 +21,12 @@ Route::prefix('/home')->group(function (){
     Route::get('', 'App\Http\Controllers\Admin\HomeController@index')->name('homeAdmin');
 
 
+    Route::prefix('/devices')->group(function (){
+
+        Route::get('/create','App\Http\Controllers\Admin\DeviceController@create')->name('createDevice');
+
+    });
+
 });
 
 

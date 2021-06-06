@@ -15,6 +15,10 @@ class CreateSensorDevicesTable extends Migration
     {
         Schema::create('sensor_devices', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique()->nullable();
+            $table->unsignedBigInteger('device_id');
+            $table->unsignedBigInteger('type_sensors_id');
+            $table->string('value')->nullable();
             $table->timestamps();
         });
     }
