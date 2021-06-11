@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::prefix('/home')->group(function (){
@@ -24,6 +24,7 @@ Route::prefix('/home')->group(function (){
     Route::prefix('/devices')->group(function (){
 
         Route::get('/create','App\Http\Controllers\Admin\DeviceController@create')->name('createDevice');
+        Route::post('/save','App\Http\Controllers\Admin\DeviceController@save')->name('saveDevice');
 
     });
 
