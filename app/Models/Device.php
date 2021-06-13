@@ -12,12 +12,17 @@ class Device extends Model
     protected $fillable = [
         'uuid',
         'nombre',
+        'token',
         'direction_id'
     ];
 
 
     public function direction(){
         return $this->hasOne('App\Models\Direction','id','direction_id');
+    }
+
+    public function sensors(){
+        return $this->hasMany('App\Models\SensorDevice','device_id','id');
     }
 
 

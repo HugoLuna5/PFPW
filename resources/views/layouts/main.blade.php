@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
+    @yield('customCSS')
     <title>PFPW</title>
 </head>
 <body>
@@ -32,12 +33,35 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="">Sensores</a>
+                        <a class="nav-link" href="{{route('homeSensors')}}">Sensores</a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="">Direcciones</a>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{url('/user/profile')}}" >Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li> <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Salir</a>
+                                <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none">
+                                    @csrf
+                                </form></li>
+                        </ul>
+                    </li>
+
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+
+
+
+
+                    </div>
 
                 </ul>
             </div>

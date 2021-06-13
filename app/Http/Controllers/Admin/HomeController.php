@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
 
     public function index(){
-        $devices = Device::paginate(10);
+        $devices = Device::all();
         return view('admin.index', compact('devices'));
     }
 

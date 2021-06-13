@@ -19,14 +19,23 @@
 
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>UUID</th>
+                                        <th>Token</th>
                                         <th>Nombre</th>
+                                        <th># Sensores</th>
                                         <th>Fecha de creación</th>
                                         <th>Fecha de actualización</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach($devices as $device)
+                                        <tr onclick="location.href = '{{route('showDevice', $device->uuid)}}'">
+                                            <td>{{$device->token}}</td>
+                                            <td>{{$device->nombre}}</td>
+                                            <td>{{$device->sensors->count()}}</td>
+                                            <td>{{$device->created_at}}</td>
+                                            <td>{{$device->updated_at}}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
 
                             </table>

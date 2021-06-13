@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeSensor extends Model
+class DataSensor extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'uuid',
-        'nombre',
-        'description'
+        'sensor_device_id',
+        'value'
     ];
-
 }

@@ -17,6 +17,7 @@ class CreateTypeSensorsTable extends Migration
             $table->id();
             $table->uuid('uuid')->unique()->nullable();
             $table->string('nombre');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

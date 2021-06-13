@@ -13,6 +13,16 @@ class SensorDevice extends Model
         'uuid',
         'device_id',
         'type_sensors_id',
-        'value'
     ];
+
+
+    public function sensor(){
+        return $this->hasOne('App\Models\TypeSensor','id','type_sensors_id');
+    }
+
+    public function values(){
+        return $this->hasMany('App\Models\DataSensor','sensor_device_id','device_id');//->orderBy('created_at')->first();
+    }
+
+
 }

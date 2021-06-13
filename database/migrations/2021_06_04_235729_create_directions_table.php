@@ -16,7 +16,6 @@ class CreateDirectionsTable extends Migration
         Schema::create('directions', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique()->nullable();
-            $table->unsignedBigInteger('device_id')->nullable();
             $table->string('latitude');
             $table->string('longitude');
             $table->text('street')->nullable();

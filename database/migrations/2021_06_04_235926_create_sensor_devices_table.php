@@ -18,7 +18,7 @@ class CreateSensorDevicesTable extends Migration
             $table->uuid('uuid')->unique()->nullable();
             $table->unsignedBigInteger('device_id');
             $table->unsignedBigInteger('type_sensors_id');
-            $table->string('value')->nullable();
+            //$table->string('value')->nullable();
             $table->timestamps();
         });
     }

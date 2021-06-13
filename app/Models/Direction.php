@@ -11,7 +11,6 @@ class Direction extends Model
 
     protected $fillable = [
         'uuid',
-        'device_id',
         'latitude',
         'longitude',
         'street',
