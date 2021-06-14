@@ -24,5 +24,9 @@ class SensorDevice extends Model
         return $this->hasMany('App\Models\DataSensor','sensor_device_id','device_id');//->orderBy('created_at')->first();
     }
 
+    public function alerts(){
+        return $this->hasMany('App\Models\ReportAlert','sensor_device_id','id');
+    }
+
 
 }

@@ -26,9 +26,12 @@ Route::middleware(['auth:sanctum'])->group(function (){
 
             Route::get('/create','App\Http\Controllers\Admin\DeviceController@create')->name('createDevice');
             Route::post('/save','App\Http\Controllers\Admin\DeviceController@save')->name('saveDevice');
+            Route::post('/delete','App\Http\Controllers\Admin\DeviceController@delete')->name('deleteDevice');
+            Route::post('/update','App\Http\Controllers\Admin\DeviceController@update')->name('updateDevice');
             Route::get('/show/{uuid}','App\Http\Controllers\Admin\DeviceController@show')->name('showDevice');
             Route::get('/show/{uuid}/sensor','App\Http\Controllers\Admin\DeviceController@addSensor')->name('addSensorDevice');
             Route::post('/save/{uuid}/sensor','App\Http\Controllers\Admin\DeviceController@saveSensor')->name('saveSensorDevice');
+            Route::post('/report','App\Http\Controllers\Admin\DeviceController@report')->name('report');
 
         });
 
@@ -41,6 +44,23 @@ Route::middleware(['auth:sanctum'])->group(function (){
 
             Route::put('/update', 'App\Http\Controllers\Admin\SensorsController@update')->name('updateSensor');
 
+
+        });
+
+        Route::prefix('/directions')->group(function (){
+
+            Route::get('', 'App\Http\Controllers\Admin\DirectionController@index')->name('homeDirection');
+            Route::get('/create', 'App\Http\Controllers\Admin\DirectionController@create')->name('createDirection');
+            Route::get('/show/{uuid}', 'App\Http\Controllers\Admin\DirectionController@show')->name('showDirection');
+            Route::post('/save', 'App\Http\Controllers\Admin\DirectionController@save')->name('saveDirection');
+            Route::post('/update', 'App\Http\Controllers\Admin\DirectionController@update')->name('updateDirection');
+            Route::post('/delete', 'App\Http\Controllers\Admin\DirectionController@delete')->name('deleteDirection');
+        });
+
+
+        Route::prefix('/alerts')->group(function (){
+
+            Route::get('', 'App\Http\Controllers\Admin\AlertController@index')->name('homeAlert');
 
         });
 

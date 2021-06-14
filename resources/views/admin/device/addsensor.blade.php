@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="container">
-        @include('layouts.alerts')
+
         <div class="row">
 
             <div class="col-6 offset-3 mt-4">

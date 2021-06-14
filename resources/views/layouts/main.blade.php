@@ -18,7 +18,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid customMarginNav">
-            <a class="navbar-brand" href="#">PFPW</a>
+            <a class="navbar-brand" href="{{url('/')}}">PFPW</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,18 +26,22 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
                 <ul class="navbar-nav ml-auto marginMenu">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{route('homeAdmin')}}">Inicio</a>
+                        <a class="nav-link {{ (\Request::route()->getName() == 'homeAdmin') ? 'active' : ''  }}" aria-current="page" href="{{route('homeAdmin')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('createDevice')}}">Agregar disp</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('homeSensors')}}">Sensores</a>
+                        <a class="nav-link {{ (\Request::route()->getName() == 'createDevice') ? 'active' : ''  }}" href="{{route('createDevice')}}">Agregar disp</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="">Direcciones</a>
+                        <a class="nav-link {{ (\Request::route()->getName() == 'homeSensors') ? 'active' : ''  }}" href="{{route('homeSensors')}}">Sensores</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ (\Request::route()->getName() == 'homeDirection') ? 'active' : ''  }}" href="{{route('homeDirection')}}">Direcciones</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ (\Request::route()->getName() == 'homeAlert') ? 'active' : ''  }}" href="{{route('homeAlert')}}">Alertas</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -68,6 +72,7 @@
         </div>
     </nav>
 
+    @include('layouts.alerts')
 
     @yield('content')
 </div>
