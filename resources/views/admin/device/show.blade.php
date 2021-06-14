@@ -99,7 +99,11 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{$sensor->updated_at}}
+                                            @if($sensor->values->last())
+                                                {!! $sensor->values->last()->updated_at !!}
+
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -146,6 +150,15 @@
                             <option value="Datos y alertas">Datos y alertas</option>
                             <option value="Solo Datos">Solo Datos</option>
                             <option value="Solo Alertas">Solo Alertas</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="action">¿Enviar a mi correo electronico?</label>
+                        <select name="action" id="action" class="form-control">
+                            <option value="no">No</option>
+                            <option value="si">Si</option>
+
                         </select>
                     </div>
 

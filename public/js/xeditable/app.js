@@ -4541,7 +4541,7 @@ Editableform based on Twitter Bootstrap 3
 
             //for bs3 set default class `input-sm` to standard inputs
             var emptyInputClass = this.input.options.inputclass === null || this.input.options.inputclass === false;
-            var defaultClass = 'input-sm';
+            var defaultClass = '';
 
             //bs3 add `form-control` class to standard inputs
             var stdtypes = 'text,select,textarea,password,email,url,tel,number,range,time,typeaheadjs'.split(',');
@@ -4594,11 +4594,17 @@ Editableform based on Twitter Bootstrap 3
     "use strict";
 
     //extend methods
+    /*
     $.extend($.fn.editableContainer.Popup.prototype, {
         containerName: 'popover',
         containerDataName: 'bs.popover',
         innerCss: '.popover-content',
         defaults: $.fn.popover.Constructor.DEFAULTS,
+     */
+    $.extend($.fn.editableContainer.Popup.prototype, {
+        containerName: 'popover',
+        containerDataName: 'bs.popover',
+        innerCss: '.popover-content',
 
         initContainer: function(){
             $.extend(this.containerOptions, {

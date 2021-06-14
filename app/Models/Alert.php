@@ -16,4 +16,9 @@ class Alert extends Model
       'value',
     ];
 
+
+    public function device(){
+        return $this->hasOne('App\Models\Device','id','device_id');
+    }
+
 }

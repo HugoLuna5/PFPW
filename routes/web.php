@@ -61,6 +61,10 @@ Route::middleware(['auth:sanctum'])->group(function (){
         Route::prefix('/alerts')->group(function (){
 
             Route::get('', 'App\Http\Controllers\Admin\AlertController@index')->name('homeAlert');
+            Route::get('/create', 'App\Http\Controllers\Admin\AlertController@create')->name('createAlert');
+            Route::post('/save', 'App\Http\Controllers\Admin\AlertController@save')->name('saveAlert');
+            Route::put('/update', 'App\Http\Controllers\Admin\AlertController@update')->name('updateAlert');
+            Route::put('/delete', 'App\Http\Controllers\Admin\AlertController@delete')->name('deleteAlert');
 
         });
 

@@ -171,6 +171,7 @@ class DeviceController extends Controller
 
     public function report(Request $request){
         $validator = Validator::make($request->all(), [
+            'action' => ['required'],
             'info' => ['required'],
             'type' => ['required'],
             'date' => ['required'],
@@ -187,6 +188,7 @@ class DeviceController extends Controller
         $start = null;
         $end = null;
         $info = $request->info;
+        $nameFile = \Ramsey\Uuid\Uuid::uuid4()->toString().'.pdf';
 
         if ($request->date == 'now'){
 
@@ -202,8 +204,6 @@ class DeviceController extends Controller
             $end = $temEnd->format('Y-m-d')." 23:59:59";
         }
 
-
-
         if ($request->type == 'gen'){//General
 
             $pdf = PDF::loadView('report.gen', compact('device', 'start', 'end', 'info'));
@@ -215,9 +215,9 @@ class DeviceController extends Controller
             $pdf = PDF::loadView('report.report', compact('device', 'start', 'end', 'sensor', 'info'));
         }
 
-        $pdf->save(storage_path('app/public/'.'reporte.pdf'));
+        $pdf->save(storage_path('app/public/'.$nameFile));
 
-        return response()->json(['status'  => 'success', 'message' => 'Reporte generado correctamente'],200);
+        return response()->json(['status'  => 'success', 'message' => 'Reporte generado correctamente', 'name' => $nameFile],200);
 
     }
 

@@ -5,6 +5,7 @@ const report_sensor = document.getElementById('report_sensor');
 const date_data_report = document.getElementById('date_data_report');
 const info = document.getElementById('info');
 const dates = document.getElementById('dates');
+const action = document.getElementById('action');
 
 sensores.style.display = 'none'
 dates.style.display = 'none'
@@ -25,6 +26,7 @@ generateReport.addEventListener('click', function () {
 
         if (date_data_report.value === 'now'){//este mes
             body = JSON.stringify({
+                action: action.value,
                 info: info.value,
                 date: 'now',
                 type: 'gen',
@@ -32,6 +34,7 @@ generateReport.addEventListener('click', function () {
             })
         }else{
             body = JSON.stringify({
+                action: action.value,
                 info: info.value,
                 date: 'date_esp',
                 dateStart: dateStart,
@@ -46,6 +49,7 @@ generateReport.addEventListener('click', function () {
 
         if (date_data_report.value === 'now'){
             body = JSON.stringify({
+                action: action.value,
                 info: info.value,
                 date: 'now',
                 type: 'sen',
@@ -54,6 +58,7 @@ generateReport.addEventListener('click', function () {
             })
         }else{
             body = JSON.stringify({
+                action: action.value,
                 info: info.value,
                 date: 'date_esp',
                 dateStart: dateStart,
@@ -76,9 +81,9 @@ generateReport.addEventListener('click', function () {
         .then(function (data) {
             console.log(data)
             if (data.status === 'success') {
-                //location.href = '/home'
+                window.open('/storage/'+data.name,'_blank');
             } else {
-               //location.reload();
+               location.reload();
             }
         });
 

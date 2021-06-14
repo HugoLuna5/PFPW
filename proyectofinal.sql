@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 13-06-2021 a las 07:48:29
+-- Tiempo de generación: 14-06-2021 a las 08:24:06
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.4.13
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectofinal`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alerts`
+--
+
+CREATE TABLE `alerts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `device_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `alerts`
+--
+
+INSERT INTO `alerts` (`id`, `uuid`, `device_id`, `name`, `value`, `created_at`, `updated_at`) VALUES
+(1, 'd82f2d06-9e72-42df-9638-488a705fb40f', 1, 'Temperatura', '45', '2021-06-14 07:03:56', '2021-06-14 08:12:30');
 
 -- --------------------------------------------------------
 
@@ -110,7 +133,12 @@ INSERT INTO `data_sensors` (`id`, `uuid`, `sensor_device_id`, `value`, `created_
 (66, '8f9a17f6-10e5-4602-af95-cee1be0ce9eb', 2, 'Humedad:85.00</br>Temperatura:28.30', '2021-06-13 06:52:12', '2021-06-13 06:52:12'),
 (67, '06295d55-2241-4e25-bbd0-693625497407', 2, 'Humedad:86.00</br>Temperatura:28.00', '2021-06-13 07:07:12', '2021-06-13 07:07:12'),
 (68, 'a3190698-7c9b-46c3-b756-b84e461f652e', 2, 'Humedad:85.00</br>Temperatura:28.10', '2021-06-13 07:22:13', '2021-06-13 07:22:13'),
-(69, '379e431a-a8ac-4af2-8ee6-355bdca3f630', 2, 'Humedad:85.00</br>Temperatura:28.00', '2021-06-13 07:37:14', '2021-06-13 07:37:14');
+(69, '379e431a-a8ac-4af2-8ee6-355bdca3f630', 2, 'Humedad:85.00</br>Temperatura:28.00', '2021-06-13 07:37:14', '2021-06-13 07:37:14'),
+(70, '38e8753d-7a4d-4ac9-abaa-4a63682eb696', 1, 'Humedad:60</br>Temperatura:44', '2021-06-14 08:08:18', '2021-06-14 08:08:18'),
+(71, '65e08301-44ec-4524-b879-f4d479916d83', 1, 'Humedad:60</br>Temperatura:48', '2021-06-14 08:09:09', '2021-06-14 08:09:09'),
+(72, 'cb9653c8-3e4f-4a8e-9c25-b9d6dbdf2838', 1, 'Humedad:60</br>Temperatura:48', '2021-06-14 08:09:48', '2021-06-14 08:09:48'),
+(73, 'cc3b5a1c-b8a4-4cb9-949f-ab003f497408', 1, 'Humedad:60</br>Temperatura:48', '2021-06-14 08:18:05', '2021-06-14 08:18:05'),
+(74, '99dca251-8b0e-4425-8fc2-5b2686f7ee0d', 1, 'Humedad:60</br>Temperatura:48', '2021-06-14 08:20:23', '2021-06-14 08:20:23');
 
 -- --------------------------------------------------------
 
@@ -133,7 +161,7 @@ CREATE TABLE `devices` (
 --
 
 INSERT INTO `devices` (`id`, `uuid`, `nombre`, `token`, `direction_id`, `created_at`, `updated_at`) VALUES
-(1, 'cfbf1ff0-efcb-4fd2-b904-b286ddedadb8', 'Dispositivo 1', 'PFPW60c485af4b5c8', 1, '2021-06-12 10:00:15', '2021-06-12 10:00:15'),
+(1, 'cfbf1ff0-efcb-4fd2-b904-b286ddedadb8', 'Dispositivo 1', 'PFPW60c485af4b5c8', 1, '2021-06-12 10:00:15', '2021-06-14 02:33:47'),
 (2, '94e4ffc2-fa5a-4b2b-9a2d-846a1dc925fa', 'Dispositivo 2', 'PFPW60c542216c2ac', 1, '2021-06-12 23:24:17', '2021-06-12 23:24:17');
 
 -- --------------------------------------------------------
@@ -163,7 +191,8 @@ CREATE TABLE `directions` (
 --
 
 INSERT INTO `directions` (`id`, `uuid`, `latitude`, `longitude`, `street`, `colony`, `city`, `state`, `cp`, `reference_dir`, `direction_complete`, `created_at`, `updated_at`) VALUES
-(1, '7c920092-d7b7-4efb-b619-e627eab930be', '21.34706674472849', '-98.22210776090166', 'Quinta Minero', 'El Rastro', 'Tantoyuca', 'Veracruz', '92124', NULL, 'Quinta Minero 112, El Rastro, 92124 Tantoyuca, Ver., México', '2021-06-12 10:00:15', '2021-06-12 10:00:15');
+(1, '7c920092-d7b7-4efb-b619-e627eab930be', '21.34706674472849', '-98.22210776090166', 'Quinta Minero', 'El Rastro', 'Tantoyuca', 'Veracruz', '92124', 'Casa de color blanco, en un portón café', 'Quinta Minero 112, El Rastro, 92124 Tantoyuca, Ver., México', '2021-06-12 10:00:15', '2021-06-13 23:25:53'),
+(2, 'f2214d55-e184-4569-8806-32dad2f3f71a', '21.3566987', '-98.23224619999999', 'Andrés Quintana Roo', 'Santa Fe', 'Tantoyuca', 'Veracruz', '92127', 'Casa color mostaza, a lado del Mini Super Cynthi', 'Andrés Quintana Roo 575, Santa Fe, 92127 Tantoyuca, Ver., México', '2021-06-13 23:05:17', '2021-06-13 23:05:17');
 
 -- --------------------------------------------------------
 
@@ -208,7 +237,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2021_06_04_235729_create_directions_table', 2),
 (9, '2021_06_04_235811_create_type_sensors_table', 2),
 (10, '2021_06_04_235926_create_sensor_devices_table', 2),
-(13, '2021_06_11_190516_create_data_sensors_table', 3);
+(13, '2021_06_11_190516_create_data_sensors_table', 3),
+(16, '2021_06_13_222444_create_alerts_table', 4),
+(17, '2021_06_13_223308_create_report_alerts_table', 4);
 
 -- --------------------------------------------------------
 
@@ -245,7 +276,36 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'devices', '689cb7eec2d1b071c93b281caf246286eb9cca64f6535adea30a6b8bcbeeae5a', '[\"read\",\"create\",\"update\",\"delete\"]', '2021-06-13 07:37:14', '2021-06-12 12:37:02', '2021-06-13 07:37:14');
+(1, 'App\\Models\\User', 1, 'devices', '689cb7eec2d1b071c93b281caf246286eb9cca64f6535adea30a6b8bcbeeae5a', '[\"read\",\"create\",\"update\",\"delete\"]', '2021-06-14 08:20:21', '2021-06-12 12:37:02', '2021-06-14 08:20:21');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `report_alerts`
+--
+
+CREATE TABLE `report_alerts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `device_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `alert_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `sensor_device_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `normal_value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `current_value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `report_alerts`
+--
+
+INSERT INTO `report_alerts` (`id`, `uuid`, `device_id`, `alert_id`, `sensor_device_id`, `normal_value`, `current_value`, `created_at`, `updated_at`) VALUES
+(1, '0a331d86-7a8f-4910-9782-63837a499d8c', 1, 1, 1, '45', '48', '2021-06-14 08:12:37', '2021-06-14 08:12:37'),
+(2, 'c872f260-0af9-4759-90a6-42226097161d', 1, 1, 1, '45', '48', '2021-06-14 08:13:08', '2021-06-14 08:13:08'),
+(3, '9fac0cbc-c808-467e-a0ec-ec82b5f59b44', 1, 1, 1, '45', '48', '2021-06-14 08:13:49', '2021-06-14 08:13:49'),
+(4, '1687852a-e7b0-4be5-8a33-322ae4c1c78a', 1, 1, 1, '45', '48', '2021-06-14 08:18:02', '2021-06-14 08:18:02'),
+(5, '3f009e1d-bb15-4fd2-a72c-350e7502a2e0', 1, 1, 1, '45', '48', '2021-06-14 08:20:21', '2021-06-14 08:20:21');
 
 -- --------------------------------------------------------
 
@@ -290,8 +350,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('46CeeMmO1oXyGeRmuXIz7fV8qxETwjxB76ChH6Yo', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiSXBjUTMzTUk1R2xoZ0ZJcEQzVUFSZll0NExtalEwc3NyVTNKS09aeCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjgxOiJodHRwczovL3Byb3llY3RvZmluYWwudGVzdC9ob21lL2RldmljZXMvc2hvdy9jZmJmMWZmMC1lZmNiLTRmZDItYjkwNC1iMjg2ZGRlZGFkYjgiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkYWV3UjcvejhPcC50SEVycDJBVzdWZTBzR09CdnRUdVpydHZiZXBuSWhTYWpqU0lvRlBJMW0iO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGFld1I3L3o4T3AudEhFcnAyQVc3VmUwc0dPQnZ0VHVacnR2YmVwbkloU2FqalNJb0ZQSTFtIjt9', 1623570451),
-('j4ugVVAgPIWlEyFcruUoLTxZ8J1k65jNmyXKdWph', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiblg2dzZRczJJME1GTHpmdVdjSnNEblpPNXVOR2ZJSWlHQmdvV0Z5dSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODE6Imh0dHBzOi8vcHJveWVjdG9maW5hbC50ZXN0L2hvbWUvZGV2aWNlcy9zaG93L2NmYmYxZmYwLWVmY2ItNGZkMi1iOTA0LWIyODZkZGVkYWRiOCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkYWV3UjcvejhPcC50SEVycDJBVzdWZTBzR09CdnRUdVpydHZiZXBuSWhTYWpqU0lvRlBJMW0iO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGFld1I3L3o4T3AudEhFcnAyQVc3VmUwc0dPQnZ0VHVacnR2YmVwbkloU2FqalNJb0ZQSTFtIjt9', 1623541002);
+('ExbosxyiQwVbTY0R2cNe1bAxBBB1JlOGOyToLXbF', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVE40NnJibUZYejFYTTFiczdFZEtxaURHcGxNekRGUkVLVXdKMm1IYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODE6Imh0dHBzOi8vcHJveWVjdG9maW5hbC50ZXN0L2hvbWUvZGV2aWNlcy9zaG93L2NmYmYxZmYwLWVmY2ItNGZkMi1iOTA0LWIyODZkZGVkYWRiOCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRhZXdSNy96OE9wLnRIRXJwMkFXN1ZlMHNHT0J2dFR1WnJ0dmJlcG5JaFNhampTSW9GUEkxbSI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkYWV3UjcvejhPcC50SEVycDJBVzdWZTBzR09CdnRUdVpydHZiZXBuSWhTYWpqU0lvRlBJMW0iO30=', 1623658442);
 
 -- --------------------------------------------------------
 
@@ -348,6 +407,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tw
 --
 
 --
+-- Indices de la tabla `alerts`
+--
+ALTER TABLE `alerts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `alerts_uuid_unique` (`uuid`);
+
+--
 -- Indices de la tabla `data_sensors`
 --
 ALTER TABLE `data_sensors`
@@ -396,6 +462,13 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indices de la tabla `report_alerts`
+--
+ALTER TABLE `report_alerts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `report_alerts_uuid_unique` (`uuid`);
+
+--
 -- Indices de la tabla `sensor_devices`
 --
 ALTER TABLE `sensor_devices`
@@ -429,22 +502,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `alerts`
+--
+ALTER TABLE `alerts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `data_sensors`
 --
 ALTER TABLE `data_sensors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de la tabla `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `directions`
 --
 ALTER TABLE `directions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -456,13 +535,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `report_alerts`
+--
+ALTER TABLE `report_alerts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `sensor_devices`

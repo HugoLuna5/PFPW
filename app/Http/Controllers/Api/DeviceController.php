@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendAlert;
+use App\Models\Alert;
 use App\Models\DataSensor;
 use App\Models\Device;
+use App\Models\ReportAlert;
+use App\Models\SensorDevice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class DeviceController extends Controller
@@ -27,7 +32,7 @@ class DeviceController extends Controller
 
             $request['uuid'] = \Ramsey\Uuid\Uuid::uuid4()->toString();
 
-            $request['value'] = $this->checkValues($request->values);
+            $request['value'] = $this->checkValues($request->values, $request->sensor_device_id);
 
 
             $newValue = DataSensor::create($request->all());
@@ -45,10 +50,15 @@ class DeviceController extends Controller
         return $this->responseJson(['status' => 'error', 'message' => 'Ocurrio un error al registar el nuevo valor'], $this->successStatus);
     }
 
-    public function checkValues($values)
+    public function checkValues($values, $id)
     {
         $allItems = '';
         $size = sizeof($values);
+
+        $sensor = SensorDevice::find($id);
+        $device = Device::find($sensor->device_id);
+
+        $alerts = Alert::where('device_id', '=', $sensor->device_id)->get();
 
         for ($i = 0; $i < $size; $i++) {
 
@@ -56,6 +66,35 @@ class DeviceController extends Controller
                 $allItems .= $values[$i]['item'] . ':' . $values[$i]['valor'] . '';
             } else {
                 $allItems .= $values[$i]['item'] . ':' . $values[$i]['valor'] . '</br>';
+            }
+
+
+            foreach ($alerts as $alert){
+
+                if ( (strtolower(trim($values[$i]['item'])) == strtolower(trim($alert->name))) &&
+                    ( (float)$values[$i]['valor'] >= (float)$alert->value)
+                ){
+                    ReportAlert::create([
+                       'uuid' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
+                        'device_id' => $sensor->device_id,
+                        'alert_id' => $alert->id,
+                        'sensor_device_id' => $id,
+                        'normal_value' => (float)$alert->value,
+                        'current_value' => (float)$values[$i]['valor']
+                    ]);
+
+
+                    $objDemo = new \stdClass();
+                    $objDemo->device = $device->nombre;
+                    $objDemo->alert = $alert->name;
+                    $objDemo->normal = (float)$alert->value;
+                    $objDemo->current = (float)$values[$i]['valor'];
+                    $objDemo->sender = 'megah@terciajcl.com';
+                    $objDemo->receiver = "hugodariolc@gmail.com";
+
+                    Mail::to("hugodariolc@gmail.com")->send(new SendAlert($objDemo));
+                }
+
             }
 
         }
